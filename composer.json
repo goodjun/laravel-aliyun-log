@@ -1,0 +1,16 @@
+{
+    "name": "goodjun/laravel-aliyun-log",
+    "autoload": {
+        "psr-4": {
+            "Goodjun\\AliyunLog\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "goodjun"
+        }
+    ],
+    "require": {
+        "goodjun/aliyun-open-api-sls": "^1.1"
+    }
+}
