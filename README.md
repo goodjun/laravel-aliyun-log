@@ -15,7 +15,7 @@ composer require goodjun/laravel-aliyun-log
 
 ### Laravel without auto-discovery:
 
-If you don't use auto-discovery, add the ServiceProvider to the providers array in config/app.php
+If you don't use auto-discovery, add the ServiceProvider to the providers array in `config/app.php`
 
 ``` php
 Goodjun\AliyunLog\AliyunLogServiceProvider::class,
@@ -25,6 +25,18 @@ Goodjun\AliyunLog\AliyunLogServiceProvider::class,
 
 ``` bash
 php artisan vendor:publish  --provider="Goodjun\AliyunLog\AliyunLogServiceProvider"
+```
+
+## Configuration
+
+Add your Aliyun Access Key, Key Secret, Endpoint, Project Name and Store Name to your `.env`:
+
+```dotenv
+ALIYUN_LOG_ACCESS_KEY_ID= # access key id
+ALIYUN_LOG_ACCESS_KEY_SECRET= # access key secret
+ALIYUN_LOG_ENDPOINT= # endpoint, reference https://help.aliyun.com/document_detail/29008.html
+ALIYUN_LOG_PROJECT= # project name
+ALIYUN_LOG_LOG_STORE= # store name
 ```
 
 ## Usage
