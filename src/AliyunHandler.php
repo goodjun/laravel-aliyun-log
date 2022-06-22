@@ -1,21 +1,30 @@
 <?php
 
-namespace Goodjun\AliyunLog\Monolog;
+namespace Goodjun\AliyunLog;
 
 use Aliyun\SLS\Client;
 use Aliyun\SLS\Models\LogItem;
 use Aliyun\SLS\Requests\PutLogsRequest;
+use Exception;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger;
-use Exception;
 
 class AliyunHandler extends AbstractProcessingHandler
 {
+    const ALIYUN_LOG_ERROR_FILENAME = 'aliyun-log-error';
+
+    const LARAVEL_FILENAME = 'laravel';
+
     /**
      * @var Logger
      */
-    private $storesLogs;
+    private $laravelLogger;
+
+    /**
+     * @var Logger
+     */
+    private $aliyunErrorLogger;
 
     /**
      * @var Client
@@ -28,9 +37,13 @@ class AliyunHandler extends AbstractProcessingHandler
      */
     public function __construct($level = Logger::DEBUG, $bubble = true)
     {
-        $this->storesLogs = new Logger('AliyunLog');
-        $storesLogsHandler = new RotatingFileHandler(storage_path('logs/aliyun-log.log'));
-        $this->storesLogs->pushHandler($storesLogsHandler);
+        $this->laravelLogger = new Logger(self::LARAVEL_FILENAME);
+        $laravelLogHandler = new RotatingFileHandler(storage_path('logs/' . self::LARAVEL_FILENAME . '.log'));
+        $this->laravelLogger->pushHandler($laravelLogHandler);
+
+        $this->aliyunErrorLogger = new Logger(self::ALIYUN_LOG_ERROR_FILENAME);
+        $aliyunErrorLogHandler = new RotatingFileHandler(storage_path('logs/' . self::ALIYUN_LOG_ERROR_FILENAME . '.log'));
+        $this->aliyunErrorLogger->pushHandler($aliyunErrorLogHandler);
 
         $this->client = new Client(
             config('aliyun-log.endpoint'),
@@ -65,9 +78,9 @@ class AliyunHandler extends AbstractProcessingHandler
         try {
             $this->client->putLogs($putLogsRequest);
         } catch (Exception $exception) {
-            $this->storesLogs->log($record['level'], $record['message'], $record['context']);
+            $this->laravelLogger->log($record['level'], $record['message'], $record['context']);
 
-            $this->storesLogs->error($exception->getMessage());
+            $this->aliyunErrorLogger->error($exception->getMessage());
         }
     }
 }
