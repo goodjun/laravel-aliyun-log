@@ -13,7 +13,9 @@ class AliyunLogProvider extends ServiceProvider
      */
     public function boot()
     {
-
+        $this->publishes([
+            __DIR__ . '/../config/aliyun-log.php' => config_path('aliyun-log.php')
+        ]);
     }
 
     /**
