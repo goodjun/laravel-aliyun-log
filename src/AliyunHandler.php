@@ -12,9 +12,9 @@ use Monolog\Logger;
 
 class AliyunHandler extends AbstractProcessingHandler
 {
-    const ALIYUN_LOG_ERROR_FILENAME = 'aliyun-log-error';
+    const ALIYUN_LOG_FILENAME = 'aliyun-log';
 
-    const LARAVEL_FILENAME = 'laravel';
+    const LARAVEL_LOG_FILENAME = 'laravel';
 
     /**
      * @var Logger
@@ -24,7 +24,7 @@ class AliyunHandler extends AbstractProcessingHandler
     /**
      * @var Logger
      */
-    private $aliyunErrorLogger;
+    private $aliyunLogger;
 
     /**
      * @var Client
@@ -37,13 +37,13 @@ class AliyunHandler extends AbstractProcessingHandler
      */
     public function __construct($level = Logger::DEBUG, $bubble = true)
     {
-        $this->laravelLogger = new Logger(self::LARAVEL_FILENAME);
-        $laravelLogHandler = new RotatingFileHandler(storage_path('logs/' . self::LARAVEL_FILENAME . '.log'));
+        $this->laravelLogger = new Logger(self::LARAVEL_LOG_FILENAME);
+        $laravelLogHandler = new RotatingFileHandler(storage_path('logs/' . self::LARAVEL_LOG_FILENAME . '.log'));
         $this->laravelLogger->pushHandler($laravelLogHandler);
 
-        $this->aliyunErrorLogger = new Logger(self::ALIYUN_LOG_ERROR_FILENAME);
-        $aliyunErrorLogHandler = new RotatingFileHandler(storage_path('logs/' . self::ALIYUN_LOG_ERROR_FILENAME . '.log'));
-        $this->aliyunErrorLogger->pushHandler($aliyunErrorLogHandler);
+        $this->aliyunLogger = new Logger(self::ALIYUN_LOG_FILENAME);
+        $aliyunLogHandler = new RotatingFileHandler(storage_path('logs/' . self::ALIYUN_LOG_FILENAME . '.log'));
+        $this->aliyunLogger->pushHandler($aliyunLogHandler);
 
         $this->client = new Client(
             config('aliyun-log.endpoint'),
@@ -80,7 +80,7 @@ class AliyunHandler extends AbstractProcessingHandler
         } catch (Exception $exception) {
             $this->laravelLogger->log($record['level'], $record['message'], $record['context']);
 
-            $this->aliyunErrorLogger->error($exception->getMessage());
+            $this->aliyunLogger->error($exception->getMessage());
         }
     }
 }
