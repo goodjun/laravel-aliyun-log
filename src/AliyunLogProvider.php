@@ -4,7 +4,7 @@ namespace Goodjun\AliyunLog;
 
 use Illuminate\Support\ServiceProvider;
 
-class AliyunLogServiceProvider extends ServiceProvider
+class AliyunLogProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.

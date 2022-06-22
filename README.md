@@ -18,13 +18,13 @@ composer require goodjun/laravel-aliyun-log
 If you don't use auto-discovery, add the ServiceProvider to the providers array in `config/app.php`
 
 ``` php
-Goodjun\AliyunLog\AliyunLogServiceProvider::class,
+Goodjun\AliyunLog\AliyunLogProvider::class,
 ```
 
 #### Copy the package config to your local config with the publish command:
 
 ``` bash
-php artisan vendor:publish  --provider="Goodjun\AliyunLog\AliyunLogServiceProvider"
+php artisan vendor:publish  --provider="Goodjun\AliyunLog\AliyunLogProvider"
 ```
 
 ## Configuration
