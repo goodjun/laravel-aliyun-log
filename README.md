@@ -47,7 +47,7 @@ Copy code in the `bootstrap/app.php`:
 
 ```php
 $app->configureMonologUsing(function (Monolog\Logger $monolog) {
-    $handler = new Goodjun\AliyunHandler();
+    $handler = new Goodjun\AliyunLog\AliyunHandler();
     $monolog->pushHandler($handler);
 });
 ```
