@@ -13,7 +13,9 @@
         "goodjun/aliyun-open-api-sls": "^1.1"
     },
     "require-dev": {
-        "laravel/framework": ">=5.1"
+        "laravel/framework": ">=5.1",
+        "phpunit/phpunit": "^6.5",
+        "orchestra/testbench": "^3.5"
     },
     "config": {
         "allow-plugins": {
@@ -24,5 +26,10 @@
       "psr-4": {
         "Goodjun\\AliyunLog\\": "src/"
       }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests"
+        }
     }
 }
