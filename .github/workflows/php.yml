@@ -22,10 +22,8 @@ jobs:
     - uses: nanasess/setup-php@v3
       with:
         php-version: '7.0'
+        tools: composer:v2.2
         
-    - name: Set composer version
-      run: composer self-update --2.2
-
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
 
