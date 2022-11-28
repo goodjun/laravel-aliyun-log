@@ -17,20 +17,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Environment Variables
-      with:
-        ALIYUN_LOG_ENDPOINT: ${{ secrets.ALIYUN_LOG_ENDPOINT }}
-        ALIYUN_LOG_ACCESS_KEY_ID: ${{ secrets.ALIYUN_LOG_ACCESS_KEY_ID }}
-        ALIYUN_LOG_ACCESS_KEY_SECRET: ${{ secrets.ALIYUN_LOG_ACCESS_KEY_SECRET }}
-        ALIYUN_LOG_PROJECT: ${{ secrets.ALIYUN_LOG_PROJECT }}
-        ALIYUN_LOG_LOG_STORE: ${{ secrets.ALIYUN_LOG_LOG_STORE }}
-      env:
-        ALIYUN_LOG_ENDPOINT: ${{ secrets.ALIYUN_LOG_ENDPOINT }}
-        ALIYUN_LOG_ACCESS_KEY_ID: ${{ secrets.ALIYUN_LOG_ACCESS_KEY_ID }}
-        ALIYUN_LOG_ACCESS_KEY_SECRET: ${{ secrets.ALIYUN_LOG_ACCESS_KEY_SECRET }}
-        ALIYUN_LOG_PROJECT: ${{ secrets.ALIYUN_LOG_PROJECT }}
-        ALIYUN_LOG_LOG_STORE: ${{ secrets.ALIYUN_LOG_LOG_STORE }}
-    
     - uses: actions/checkout@v3
     
     - uses: shivammathur/setup-php@v2
@@ -55,3 +41,9 @@ jobs:
 
     - name: Run test suite
       run: composer run-script test
+      env:
+        ALIYUN_LOG_ENDPOINT: ${{ secrets.ALIYUN_LOG_ENDPOINT }}
+        ALIYUN_LOG_ACCESS_KEY_ID: ${{ secrets.ALIYUN_LOG_ACCESS_KEY_ID }}
+        ALIYUN_LOG_ACCESS_KEY_SECRET: ${{ secrets.ALIYUN_LOG_ACCESS_KEY_SECRET }}
+        ALIYUN_LOG_PROJECT: ${{ secrets.ALIYUN_LOG_PROJECT }}
+        ALIYUN_LOG_LOG_STORE: ${{ secrets.ALIYUN_LOG_LOG_STORE }}
