@@ -2,9 +2,6 @@
 
 namespace Goodjun\AliyunLog;
 
-use Aliyun\SLS\Client;
-use Aliyun\SLS\Models\LogItem;
-use Aliyun\SLS\Requests\PutLogsRequest;
 use Exception;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Handler\RotatingFileHandler;
@@ -27,9 +24,9 @@ class AliyunHandler extends AbstractProcessingHandler
     private $aliyunLogger;
 
     /**
-     * @var Client
+     * @var AliyunLogClient
      */
-    private $client;
+    private $aliyunLogClient;
 
     /**
      * @param $level
@@ -45,10 +42,14 @@ class AliyunHandler extends AbstractProcessingHandler
         $aliyunLogHandler = new RotatingFileHandler(storage_path('logs/' . self::ALIYUN_LOG_FILENAME . '.log'));
         $this->aliyunLogger->pushHandler($aliyunLogHandler);
 
-        $this->client = new Client(
+        $this->aliyunLogClient = new AliyunLogClient(
             config('aliyun-log.endpoint'),
             config('aliyun-log.access_key_id'),
-            config('aliyun-log.access_key_secret')
+            config('aliyun-log.access_key_secret'),
+            config('aliyun-log.project'),
+            config('aliyun-log.log_store'),
+            config('aliyun-log.topic'),
+            config('aliyun-log.source')
         );
 
         parent::__construct($level, $bubble);
@@ -60,23 +61,13 @@ class AliyunHandler extends AbstractProcessingHandler
      */
     protected function write(array $record)
     {
-        $logsItem = new LogItem([
-            'Level' => $record['level'],
-            'LevelName' => $record['level_name'],
-            'Message' => $record['message'],
-            'Context' => $record['formatted'],
-        ]);
-
-        $putLogsRequest = new PutLogsRequest(
-            config('aliyun-log.project'),
-            config('aliyun-log.log_store'),
-            config('aliyun-log.topic'),
-            config('aliyun-log.source'),
-            $logsItem
-        );
-
         try {
-            $this->client->putLogs($putLogsRequest);
+            $this->aliyunLogClient->putLogs([
+                'Level' => $record['level'],
+                'LevelName' => $record['level_name'],
+                'Message' => $record['message'],
+                'Context' => $record['formatted'],
+            ]);
         } catch (Exception $exception) {
             $this->laravelLogger->log($record['level'], $record['message'], $record['context']);
 
