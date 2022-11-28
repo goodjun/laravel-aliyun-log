@@ -52,6 +52,10 @@ $app->configureMonologUsing(function (Monolog\Logger $monolog) {
 });
 ```
 
+### Laravel >= 5.6
+
+coming soon.
+
 [ico-version]: https://img.shields.io/packagist/v/goodjun/laravel-aliyun-log.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/goodjun/laravel-aliyun-log.svg?style=flat-square
