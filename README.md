@@ -4,6 +4,7 @@ Laravel Aliyun Log
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
 [![Total Downloads][ico-downloads]][link-downloads]
+[![Github Actions](https://github.com/goodjun/laravel-aliyun-log/actions/workflows/run-tests.yml/badge.svg)](https://github.com/goodjun/laravel-aliyun-log/actions/workflows/run-tests.yml)
 
 ## Installation
 
