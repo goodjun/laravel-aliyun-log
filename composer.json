@@ -5,7 +5,8 @@
     "laravel",
     "aliyun",
     "sls",
-    "logger"
+    "logger",
+    "log"
   ],
   "license": "MIT",
   "authors": [
