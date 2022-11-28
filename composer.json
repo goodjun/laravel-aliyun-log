@@ -1,35 +1,43 @@
 {
-    "name": "goodjun/laravel-aliyun-log",
-    "description": "Aliyun log for Laravel",
-    "keywords": ["laravel", "aliyun", "sls", "logger"],
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "goodjun"
-        }
-    ],
-    "require": {
-        "php": ">=5.5.9",
-        "goodjun/aliyun-open-api-sls": "^1.1"
-    },
-    "require-dev": {
-        "laravel/framework": ">=5.1",
-        "phpunit/phpunit": "^6.5",
-        "orchestra/testbench": "^3.5"
-    },
-    "config": {
-        "allow-plugins": {
-            "kylekatarnls/update-helper": true
-        }
-    },
-    "autoload": {
-      "psr-4": {
-        "Goodjun\\AliyunLog\\": "src/"
-      }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "tests"
-        }
+  "name": "goodjun/laravel-aliyun-log",
+  "description": "Aliyun log for Laravel",
+  "keywords": [
+    "laravel",
+    "aliyun",
+    "sls",
+    "logger"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "goodjun"
     }
+  ],
+  "require": {
+    "php": ">=5.5.9",
+    "goodjun/aliyun-open-api-sls": "^1.1"
+  },
+  "require-dev": {
+    "laravel/framework": ">=5.1",
+    "phpunit/phpunit": "^6.5",
+    "orchestra/testbench": "^3.5"
+  },
+  "config": {
+    "allow-plugins": {
+      "kylekatarnls/update-helper": true
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "Goodjun\\AliyunLog\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "phpunit"
+  }
 }
