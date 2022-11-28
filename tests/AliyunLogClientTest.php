@@ -24,6 +24,8 @@ class AliyunHandlerTest extends TestCase
             'Context' => json_encode(['date' => now()->toDateString()]),
         ];
 
+        $aliyunLogClient->putLogs($data);
+
         $this->assertTrue(true);
     }
 }
